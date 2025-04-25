@@ -114,7 +114,7 @@ XYZ Domain AD
 * Enter the server's PS session
 
     ```ps
-    Enter-PSSession <session_id>
+    Enter-PSSession [session_id]
     ```
 
 * (Alternative) Can directly connect to the remote PS without adding it as a session listing
@@ -220,3 +220,5 @@ XYZ Domain AD
     > Enter the password when prompted and the workstation will restart.
 
 * (Alternative) Can use GUI i.e. Settings > Accounts > Access work or school > Connect > Join local active directory domain.
+
+## Day 3: Automating Domain Users
