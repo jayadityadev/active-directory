@@ -18,14 +18,14 @@ VMware Directory Structure:
 ```
 XYZ Active Directory Domain
 └── Base Templates
-    ├── Workstation - Win10EnterpriseLTSC (VM)
-    └── Controller - WinServer2022 (VM)
+    ├── Win10ProEnterpriseLTSC (VM)
+    └── WinServer2022 (VM)
 ```
 
 1. Windows 10 Enterprise Evaluation LTSC Setup
     - Normal VM setup w/ <br>
-        `UEFI`, `4GB`, `60GB` `2x1 Cores`
-    - Normal Windows 10 installation
+        `UEFI`, `2GB`, `60GB` `2x1 Cores`
+    - Normal Windows 10 Pro installation
     - Installed VMware Tools
     - Installed Windows updates
     - Took a snapshot namely `Fresh Install`
@@ -47,25 +47,31 @@ XYZ Active Directory Domain
 VMware Directory Structure:
 
 ```
-XYZ Active Directory Domain
+XYZ Domain AD
 ├── Management Client (VM)
+├── Workstations
+│   └── WS01 (VM)
 ├── Servers
 │   └── DC1 (VM)
 └── Base Templates
-    ├── Workstation - Win11Enterprise (VM)
-    └── Controller - WinServer2022 (VM)
+    ├── Win10ProEnterprise (VM)
+    └── WinServer2022 (VM)
 ```
 
 ### Virtual Machines
 
 1. Management Client
-    - Cloned `Workstation - Win11Enterprise` from `Base Templates`
-    - Set up in the `XYZ Active Directory Domain` (root) directory
+    - Cloned `Win10ProEnterprise` from `Base Templates`
+    - Set up in the `XYZ Domain AD/` (root) directory
 
 2. DC1
-    - Cloned `Controller - WinServer2022` from `Base Templates`
-    - Set up in the `root/Servers` directory
+    - Cloned `WinServer2022` from `Base Templates`
+    - Set up in the `root/Servers/` directory
     - Installed VMware Tools
+
+3. WS01
+    - Cloned `Win10ProEnterprise` from `Base Templates`
+    - Set up in the `root/Workstations/` diretory
 
 ### *Servers/DC1* Initial Setup
 
@@ -83,6 +89,8 @@ XYZ Active Directory Domain
     - Enter new computer name: `DC1` (in this case)
 
 ### *Management Client* Initial Setup
+
+> PowerShell in Administrator mode
 
 * Enable Windows Remote Management Service
 
@@ -201,3 +209,14 @@ XYZ Active Directory Domain
 
 > The Active Directory is now set up successfully. Take a snapshot of the VM, to avoid losing this state of the VM.
 
+### Joining the created domain from `Workstations/WS01`
+
+* Using PowerShell
+
+    ```ps
+    Add-Computer -DomainName xyz.com -Credential XYZ\Administrator -Force -Restart
+    ```
+
+    > Enter the password when prompted and the workstation will restart.
+
+* (Alternative) Can use GUI i.e. Settings > Accounts > Access work or school > Connect > Join local active directory domain.
