@@ -101,13 +101,13 @@ XYZ Domain AD
 * Add the server to the list of trusted hosts
 
     ```ps
-    Set-Item wsman:\localhost\Client\TrustedHosts <server_address>
+    Set-Item wsman:\localhost\Client\TrustedHosts [server_address]
     ```
 
 * Add the remote PS session
 
     ```ps
-    New-PSSession -ComputerName <server_address> -Credential (Get-Credential)
+    New-PSSession -ComputerName [server_address> -Credential (Get-Credential]
     ```
     Enter the Credentials for the DC1 server.
 
@@ -120,7 +120,7 @@ XYZ Domain AD
 * (Alternative) Can directly connect to the remote PS without adding it as a session listing
 
     ```ps
-    Enter-PSSession -ComputerName <server_address> -Credential (Get-Credential)
+    Enter-PSSession -ComputerName [server_address] -Credential(Get-Credential)
     ```
 
 ### Active Directory Setup - On server machine i.e. `Servers/DC1`
@@ -162,7 +162,7 @@ XYZ Domain AD
     Install-ADDSForest
     ```
     Domain Name: `xyz.com` in this case <br>
-    SafeModeAdministratorPassword: <any_password>
+    SafeModeAdministratorPassword: [any_password]
 
     > NOTE: It'll take a couple minutes. Also, the installation changes the `DNS Server` back to the loop address. So change it again.
 
