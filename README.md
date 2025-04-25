@@ -107,7 +107,7 @@ XYZ Domain AD
 * Add the remote PS session
 
     ```ps
-    New-PSSession -ComputerName [server_address> -Credential (Get-Credential]
+    New-PSSession -ComputerName [server_address] -Credential (Get-Credential)
     ```
     Enter the Credentials for the DC1 server.
 
@@ -120,7 +120,7 @@ XYZ Domain AD
 * (Alternative) Can directly connect to the remote PS without adding it as a session listing
 
     ```ps
-    Enter-PSSession -ComputerName [server_address] -Credential(Get-Credential)
+    Enter-PSSession -ComputerName [server_address] -Credential (Get-Credential)
     ```
 
 ### Active Directory Setup - On server machine i.e. `Servers/DC1`
